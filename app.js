@@ -1,39 +1,49 @@
-// Braces {} - Quantifiers
-re = /Hel{2}o/i; // Must occur exactly {m} amount of times
-re = /Hel{2,4}o/i; // Must occur exactly {m} amount of times
-re = /Hel{2,}o/i; // Must occur at least {m} times
+// Add Event Listeners
+document.getElementById("name").addEventListener("blur", validateName);
+document.getElementById("zip").addEventListener("blur", validateZip);
+document.getElementById("email").addEventListener("blur", validateEmail);
+document.getElementById("phone").addEventListener("blur", validatePhone);
 
-// Paretheses () - Grouping
-re = /^([0-9]x){3}$/;
+function validateName() {
+  const name = document.getElementById("name");
+  const re = /^[a-zA-Z]{2,10}$/;
 
-// Shorthand Character Classes
-re = /\w/; // Word character - alphanumeric or _
-re = /\w+/; // + = one or more
-re = /\W/; // Non-Word character
-re = /\d/; // Match any digit
-re = /\d+/; // Match any digit 0 or more times
-re = /\D/; // Match any Non-digit
-re = /\s/; // Match whitespace char
-re = /\S/; // Match non-whitespace char
-re = /Hell\b/i; // Word boundary
-
-// Assertions
-re = /x(?=y)/; // Match x only if followed by y
-re = /x(?!y)/; // Match x only if NOT followed by y
-
-// String to match
-const str = "dkjekdxydjekdj";
-
-// Log Results
-const result = re.exec(str);
-console.log(result);
-
-function reTest(re, str) {
-  if (re.test(str)) {
-    console.log(`${str} matches ${re.source}`);
+  if (!re.test(name.value)) {
+    name.classList.add("is-invalid");
   } else {
-    console.log(`${str} does NOT match ${re.source}`);
+    name.classList.remove("is-invalid");
   }
 }
 
-reTest(re, str);
+function validateZip() {
+  const zip = document.getElementById("zip");
+  const re = /^[0-9]{5}(-[0-9]{4})?$/;
+
+  if (!re.test(zip.value)) {
+    zip.classList.add("is-invalid");
+  } else {
+    zip.classList.remove("is-invalid");
+  }
+}
+
+function validateEmail() {
+  const email = document.getElementById("email");
+  const re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+  if (!re.test(email.value)) {
+    email.classList.add("is-invalid");
+  } else {
+    email.classList.remove("is-invalid");
+  }
+}
+
+function validatePhone() {
+  const phone = document.getElementById("phone");
+  const re = /^\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}$/;
+
+  if (!re.test(phone.value)) {
+    phone.classList.add("is-invalid");
+  } else {
+    phone.classList.remove("is-invalid");
+  }
+}
